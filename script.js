@@ -74,11 +74,14 @@
 
 
 
-const initStr = prompt('Введите строку')
+const initStr = '              ddd                      ';
 
 const changeStr = function (str, maxLength = 30) {
   str = typeof str !== 'string' ? alert('Введена не строка') : str.trim();
-  if (str.length > maxLength) {
+
+  if (typeof str !== 'string') {
+    return str;
+  } else if (str.length > maxLength) {
     return str.substring(0, maxLength) + '...';
   } else {
     return str;
@@ -86,4 +89,3 @@ const changeStr = function (str, maxLength = 30) {
 };
 
 console.log(changeStr(initStr));
-
