@@ -75,7 +75,7 @@
 
 
 
-const initStr = '              ddd                      ';
+const initStr = prompt('Введите строку');
 
 const changeStr = function (str, maxLength = 30) {
   str = typeof str !== 'string' ? alert('Введена не строка') : str.trim();
