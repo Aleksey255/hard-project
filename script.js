@@ -1,3 +1,4 @@
+'use strict';
 
 const num = 266219
 
@@ -12,12 +13,6 @@ for ( const number of numbers) {
 let nums = initNum**3
 
 console.log(nums.toString().substring(0,2));
-
-
-
-
-
-
 
 
 
@@ -80,13 +75,10 @@ for (
   }
 }
 
+
+
 let namePerson = prompt('Введите имя')
 namePerson == 'Артем' ? console.log('директор') : namePerson == 'Александр' ? console.log('преподаватель') : console.log('студент');
-
-
-
-
-
 
 
 
@@ -105,6 +97,8 @@ const changeStr = function (str, maxLength = 30) {
 };
 
 console.log(changeStr(initStr));
+
+
 
 const arr = [
   '1234567890',
