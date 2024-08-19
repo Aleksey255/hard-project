@@ -1,132 +1,144 @@
 'use strict';
 
-const num = 266219
+const daysOfWeek = [
+  'воскресенье',
+  'понедельник',
+  'вторник',
+  'среда',
+  'четверг',
+  'пятница',
+  'суббота',
+];
+const months = [
+  'января',
+  'февраля',
+  'марта',
+  'апреля',
+  'мая',
+  'июня',
+  'июля',
+  'августа',
+  'сентября',
+  'октября',
+  'ноября',
+  'декабря',
+];
 
-let initNum = 1
+const changeTime = function (hour, minute, second) {
+  let hourStr = '';
+  if ((hour >= 2 && hour <= 4) || (hour >= 22 && hour <= 23)) {
+    hourStr = `${hour} часа`;
+  } else if ((hour >= 5 && hour <= 20) || hour == 0) {
+    hourStr = `${hour} часов`;
+  } else if (hour == 1 || hour == 21) {
+    hourStr = `${hour} час`;
+  }
+  let minuteStr = '';
+  if (
+    (minute >= 2 && minute <= 4) ||
+    (minute >= 22 && minute <= 24) ||
+    (minute >= 32 && minute <= 34) ||
+    (minute >= 42 && minute <= 44) ||
+    (minute >= 52 && minute <= 54)
+  ) {
+    minuteStr = `${minute} минуты`;
+  } else if (
+    minute == 0 ||
+    (minute >= 5 && minute <= 20) ||
+    (minute >= 25 && minute <= 30) ||
+    (minute >= 35 && minute <= 40) ||
+    (minute >= 45 && minute <= 50) ||
+    (minute >= 55 && minute <= 59)
+  ) {
+    minuteStr = `${minute} минут`;
+  } else if (
+    minute == 1 ||
+    minute == 21 ||
+    minute == 31 ||
+    minute == 41 ||
+    minute == 51
+  ) {
+    minuteStr = `${minute} минута`;
+  }
+  let secondStr = '';
+  if (
+    (second >= 2 && second <= 4) ||
+    (second >= 22 && second <= 24) ||
+    (second >= 32 && second <= 34) ||
+    (second >= 42 && second <= 44) ||
+    (second >= 52 && second <= 54)
+  ) {
+    secondStr = `${second} секунды`;
+  } else if (
+    second == 0 ||
+    (second >= 5 && second <= 20) ||
+    (second >= 25 && second <= 30) ||
+    (second >= 35 && second <= 40) ||
+    (second >= 45 && second <= 50) ||
+    (second >= 55 && second <= 59)
+  ) {
+    secondStr = `${second} секунд`;
+  } else if (
+    second == 1 ||
+    second == 21 ||
+    second == 31 ||
+    second == 41 ||
+    second == 51
+  ) {
+    secondStr = `${second} секунда`;
+  }
+  return `${hourStr} ${minuteStr} ${secondStr}`;
+};
 
-const numbers = num.toString().split('')
-
-for ( const number of numbers) {
-  initNum *= number
-}
-
-let nums = initNum**3
-
-console.log(nums.toString().substring(0,2));
-
-
-
-const lang = 'ru' || 'en';
-
-if (lang == 'ru') {
+setInterval(() => {
+  const dateA = new Date();
+  const dayOfWeek = dateA.getDay();
+  const dayOfMonth = dateA.getDate();
+  const month = dateA.getMonth();
+  const year = dateA.getFullYear();
+  const hour = dateA.getHours();
+  const minute = dateA.getMinutes();
+  const second = dateA.getSeconds();
   console.log(
-    'Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье'
+    `Сегодня ${daysOfWeek[dayOfWeek]}, ${dayOfMonth} ${
+      months[month]
+    }, ${year} года, ${changeTime(hour, minute, second)}`
   );
-} else if (lang == 'en') {
-  console.log('Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday');
-}
+}, 1000);
 
-switch (lang) {
-  case 'ru':
-    console.log(
-      'Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье'
-    );
-    break;
-  case 'en':
-    console.log(
-      'Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday'
-    );
-    break;
-
-  default:
-    console.log('неверный язык');
-    break;
-}
-
-let daysOfWeek = [
-  [
-    'Понедельник',
-    'Вторник',
-    'Среда',
-    'Четверг',
-    'Пятница',
-    'Суббота',
-    'Воскресенье',
-  ],
-  [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ],
-];
-
-for (
-  let languageIndex = 0;
-  languageIndex < daysOfWeek.length;
-  languageIndex++
-) {
-  const languageDays = daysOfWeek[languageIndex];
-  for (let daysIndex = 0; daysIndex < languageDays.length; daysIndex++) {
-    console.log(languageDays[daysIndex]);
+const changeDate = function (day, month, year, hour, minute, second) {
+  let dayStr = day;
+  if (day >= 0 && day <= 9) {
+    dayStr = `0${day}`;
   }
-}
-
-
-
-let namePerson = prompt('Введите имя')
-namePerson == 'Артем' ? console.log('директор') : namePerson == 'Александр' ? console.log('преподаватель') : console.log('студент');
-
-
-
-const initStr = prompt('Введите строку');
-
-const changeStr = function (str, maxLength = 30) {
-  str = typeof str !== 'string' ? alert('Введена не строка') : str.trim();
-
-  if (typeof str !== 'string') {
-    return str;
-  } else if (str.length > maxLength) {
-    return str.substring(0, maxLength) + '...';
-  } else {
-    return str;
+  let monthStr = month;
+  if (month >= 0 && month <= 9) {
+    monthStr = `0${month}`;
   }
+  let hourStr = hour;
+  if (hour >= 0 && hour <= 9) {
+    hourStr = `0${hour}`;
+  }
+  let minuteStr = minute;
+  if (minute >= 0 && minute <= 9) {
+    minuteStr = `0${minute}`;
+  }
+  let secondStr = second;
+  if (second >= 0 && second <= 9) {
+    secondStr = `0${second}`;
+  }
+  return console.log(
+    `${dayStr}.${monthStr}.${year} - ${hourStr}:${minuteStr}:${secondStr}`
+  );
 };
 
-console.log(changeStr(initStr));
-
-
-
-const arr = [
-  '1234567890',
-  '234567890',
-  '34567890',
-  '4567890',
-  '567890',
-  '67890',
-  '7890',
-];
-
-for (let i = 0; i < arr.length; i++) {
-  const num = arr[i];
-  if (num[0] == '2' || num[0] == '4') {
-    console.log(num);
-  }
-}
-
-const simpleNum = function () {
-  for (let i = 2; i < 101; i++) {
-    if (i === 2 || i === 3 || i === 5 || i === 7) {
-      console.log(i, `Делители этого числа: 1 и ${i}`);
-    } else if (i % 2 === 0 || i % 3 === 0 || i % 5 === 0 || i % 7 === 0) {
-      continue;
-    } else if (i % i === 0) {
-      console.log(i, `Делители этого числа: 1 и ${i}`);
-    }
-  }
-};
-
-simpleNum();
+setInterval(() => {
+  const dateB = new Date();
+  const dayB = dateB.getDate();
+  const monthB = dateB.getMonth() + 1;
+  const yearB = dateB.getFullYear();
+  const hourB = dateB.getHours();
+  const minuteB = dateB.getMinutes();
+  const secondB = dateB.getSeconds();
+  changeDate(dayB, monthB, yearB, hourB, minuteB, secondB);
+}, 1000);
