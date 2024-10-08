@@ -1,20 +1,38 @@
 'use strict';
 
-const input = document.querySelector('.input');
-const text = document.querySelector('.text');
+const square = document.querySelector('.square');
+const reset = document.querySelector('.reset');
 
-const handleInput = () => {
-  text.textContent =  input.value
-}
+let active = false;
+let count = 50;
+let idInterval;
 
-const debounce = (func, delay) => {
-  let timer;
-  return function(...args) {
-      clearTimeout(timer);
-      timer = setTimeout(() => func.apply(this, args), delay);
-  };
+const animate = () => {
+  count++;
+  idInterval = requestAnimationFrame(animate);
+
+  if (count < 2000) {
+    square.style.width = count + 'px';
+    square.style.height = count + 'px';
+  } else {
+    cancelAnimationFrame(idInterval);
+  }
 };
 
-const debounceHandleInput = debounce(handleInput, 300)
+square.addEventListener('click', () => {
+  if (active) {
+    cancelAnimationFrame(idInterval);
+    active = false;
+  } else {
+    idInterval = requestAnimationFrame(animate);
+    active = true;
+  }
+});
 
-input.addEventListener('input', debounceHandleInput );
+reset.addEventListener('click', () => {
+  count = 50;
+  square.style.width = count + 'px';
+  square.style.height = count + 'px';
+  cancelAnimationFrame(idInterval);
+  active = false;
+});
